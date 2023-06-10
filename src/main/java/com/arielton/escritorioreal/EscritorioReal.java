@@ -23,15 +23,21 @@ import javax.swing.JFrame;
 public class EscritorioReal {
 
     public static void main(String[] args) throws SQLException {
-        Connection conexao = Mysql.conector();
+    Connection conexao = Mysql.conector();
 
 //        TelaLogin telaLogin = new TelaLogin(conexao);
 //        telaLogin.setSize(600, 400);
 //        telaLogin.set();
 
-          JFrame tela = new Login(conexao);
-          tela.setVisible(true);
+           JFrame tela = new Login(conexao);
+           tela.setVisible(true);
+          
+//          Despesa despesa = new Despesa(conexao);
+//          ArrayList<Despesa> despesas = despesa.pesquisarPorCategoria("2023-02-01", "2023-10-01");
 
+//        for (Despesa item : despesas) {
+//            System.out.println("NOME: " + item.getDescricacao_item() + " - " + item.getData());
+//        }
 //        Categoria categoria = new Categoria(conexao,"","DESPESA");
 //        for (Categoria item : categoria.buscarCategoria("DESPESA", "ARI")) {
 //            System.out.println("NOME: " + item.getNome_categoria());

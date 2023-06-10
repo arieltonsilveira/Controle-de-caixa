@@ -54,6 +54,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jMenu1.add(itCadastrarDespesa);
 
         itListarDespesa.setText("Listar Dispesas");
+        itListarDespesa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itListarDespesaActionPerformed(evt);
+            }
+        });
         jMenu1.add(itListarDespesa);
 
         jMenuBar1.add(jMenu1);
@@ -163,6 +168,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         JFrame listCategorias = new TelaListaCategoria();
         listCategorias.setVisible(true);
     }//GEN-LAST:event_itListarCategoriasActionPerformed
+
+    private void itListarDespesaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itListarDespesaActionPerformed
+        JFrame listDespesa = new TelaListarDespesa();
+        listDespesa.setVisible(true);
+    }//GEN-LAST:event_itListarDespesaActionPerformed
 
     /**
      * @param args the command line arguments

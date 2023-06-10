@@ -28,23 +28,24 @@ public class Despesa extends HistoricoDespesaRecebivel {
         super(conexao, descricao_item, valor, data, categoria);
     }
 
-    public ArrayList<Recebivel> pesquisarPorCategoria(String data_inicio, String data_final) {
+    public ArrayList<Despesa> pesquisarPorCategoria(String data_inicio, String data_final, String nome) {
         try {
-            String sql = "SELECT * FROM escritorio_real.historico_despesa_recebivel as rec inner join categoria as cat on cat.id = rec.categoria_id where cat.tipo = 'DESPESA' and rec.data_cadastro between ? and ?;";
+            String sql = "SELECT * FROM escritorio_real.historico_despesa_recebivel as rec inner join categoria as cat on cat.id = rec.categoria_id where cat.tipo = 'DESPESA' and rec.data_cadastro between ? and ? and descricao_item like ?";
 
             PreparedStatement pst = conexao.prepareStatement(sql);
             pst.setString(1, data_inicio);
             pst.setString(2, data_final);
+            pst.setString(3, "%" + nome + "%");
             ResultSet rs = pst.executeQuery();
             
-            ArrayList<Recebivel> recebiveis = new ArrayList<>();
+            ArrayList<Despesa> despesa = new ArrayList<>();
             
             while (rs.next()) {
-                recebiveis.add(new Recebivel(rs.getInt("rec.id"), rs.getString("descricao_item"), rs.getFloat("valor"),
+                despesa.add(new Despesa(rs.getInt("rec.id"), rs.getString("descricao_item"), rs.getFloat("valor"),
                         rs.getString("data_cadastro"), new Categoria(rs.getInt("cat.id"), rs.getString("descricao_item"), "DESPESA"))
                 );
             }
-            return recebiveis;
+            return despesa;
         } catch (SQLException e) {
             System.out.println("Erro ao pesquisar despesa por categoria !" + e.getMessage());
             return new ArrayList<>();

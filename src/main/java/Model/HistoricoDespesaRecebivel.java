@@ -121,6 +121,14 @@ public class HistoricoDespesaRecebivel {
         this.categoria = categoria;
     }
 
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
+
     public Connection getConexao() {
         return conexao;
     }
