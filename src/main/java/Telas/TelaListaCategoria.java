@@ -50,7 +50,7 @@ public class TelaListaCategoria extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtPesCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,11 +108,11 @@ public class TelaListaCategoria extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
                                     .addComponent(txtPesCategoria))
-                                .addGap(18, 18, 18))))
+                                .addContainerGap(23, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -257,7 +257,7 @@ public class TelaListaCategoria extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "PREENCHA O NOME DA CATEGORIA!", "ERRO DE UPDATE", HEIGHT);
         }
         
-        Categoria categoria = new Categoria(conexao, txtNomeCategoria.getText(), cbTipo.getSelectedItem().toString());
+        Categoria categoria = new Categoria(conexao, txtNomeCategoria.getText(), cbTipoEdit.getSelectedItem().toString());
         categoria.setId(categorias.get(listCategorias.getSelectedIndex()).getId());
         if (categoria.atualizarCategoria()) {
             JOptionPane.showMessageDialog(rootPane, "CATEGORIA ATUALIZADA COM SUCESSO!", "ATUALIZADO COM SUCESSO", EXIT_ON_CLOSE);

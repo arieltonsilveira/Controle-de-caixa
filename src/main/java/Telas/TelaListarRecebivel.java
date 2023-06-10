@@ -4,7 +4,7 @@
  */
 package Telas;
 
-import Model.Despesa;
+import Model.Recebivel;
 import ModuloConexao.Mysql;
 import java.sql.Connection;
 import java.time.LocalDate;
@@ -19,11 +19,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author ariel
  */
-public class TelaListarDespesa extends javax.swing.JFrame {
+public class TelaListarRecebivel extends javax.swing.JFrame {
 
     Connection conexao;
 
-    public TelaListarDespesa() {
+    public TelaListarRecebivel() {
         initComponents();
         this.conexao = Mysql.conector();
     }
@@ -73,7 +73,7 @@ public class TelaListarDespesa extends javax.swing.JFrame {
 
         jLabel2.setText("Data final");
 
-        jLabel3.setText("Nome da Despesa");
+        jLabel3.setText("Nome do Recebivel");
 
         btPesquisar.setText("Pesquisar");
         btPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +123,6 @@ public class TelaListarDespesa extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtPesDespesa)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -131,7 +130,8 @@ public class TelaListarDespesa extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtPesDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtPesDataFim, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45))
@@ -194,10 +194,11 @@ public class TelaListarDespesa extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "SELECIONE O ITEM PARA APAGAR!", "ERRO AO APAGAR DADO", HEIGHT);
             return;
         }
-        Despesa despesa = new Despesa(conexao);
-        despesa.setId(Integer.parseInt(tblDespesas.getValueAt(tblDespesas.getSelectedRow(), 0).toString()));
+
+        Recebivel recebivel = new Recebivel(conexao);
+        recebivel.setId(Integer.parseInt(tblDespesas.getValueAt(tblDespesas.getSelectedRow(), 0).toString()));
         
-        if (despesa.apagar()) {
+        if (recebivel.apagar()) {
             JOptionPane.showMessageDialog(rootPane, "DADO APAGADO COM SUCESSO!", "SUCESSO", EXIT_ON_CLOSE);
             txtNomeDespesa.setText("");
         } else {
@@ -222,20 +223,21 @@ public class TelaListarDespesa extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaListarDespesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListarRecebivel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaListarDespesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListarRecebivel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaListarDespesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListarRecebivel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaListarDespesa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaListarRecebivel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaListarDespesa().setVisible(true);
+                new TelaListarRecebivel().setVisible(true);
             }
         });
     }
@@ -283,8 +285,8 @@ public class TelaListarDespesa extends javax.swing.JFrame {
 
         var modelo = criaJTable();
 	modelo.setNumRows(0);
-	Despesa dao = new Despesa(conexao);
-	for (Despesa c : dao.pesquisarPorCategoria(inicio[2]+"-"+inicio[1]+"-"+inicio[0], fim[2]+"-"+fim[1]+"-"+fim[0], txtPesDespesa.getText())) {
+	Recebivel dao = new Recebivel(conexao);
+	for (Recebivel c : dao.pesquisarPorCategoria(inicio[2]+"-"+inicio[1]+"-"+inicio[0], fim[2]+"-"+fim[1]+"-"+fim[0], txtPesDespesa.getText())) {
             modelo.addRow(new Object[]{c.getId(), c.getDescricacao_item(),
                 c.getValor(), c.getData(), c.getCategoria().getNome_categoria()});
         }

@@ -28,13 +28,14 @@ public class Recebivel extends HistoricoDespesaRecebivel{
         super(conexao, descricao_item, valor, data, categoria);
     }
     
-    public ArrayList<Recebivel> pesquisarPorCategoria(String data_inicio, String data_final) {
+    public ArrayList<Recebivel> pesquisarPorCategoria(String data_inicio, String data_final, String nome) {
         try {
-            String sql = "SELECT * FROM escritorio_real.historico_despesa_recebivel as rec inner join categoria as cat on cat.id = rec.categoria_id where cat.tipo = 'RECEBIVEL' and rec.data_cadastro between ? and ?;";
+            String sql = "SELECT * FROM escritorio_real.historico_despesa_recebivel as rec inner join categoria as cat on cat.id = rec.categoria_id where cat.tipo = 'RECEBIVEL' and rec.data_cadastro between ? and ? and descricao_item like ?";
 
             PreparedStatement pst = conexao.prepareStatement(sql);
             pst.setString(1, data_inicio);
             pst.setString(2, data_final);
+            pst.setString(3, "%" + nome + "%");
             ResultSet rs = pst.executeQuery();
             
             ArrayList<Recebivel> recebiveis = new ArrayList<>();
