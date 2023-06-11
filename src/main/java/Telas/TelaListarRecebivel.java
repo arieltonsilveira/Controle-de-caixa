@@ -51,6 +51,7 @@ public class TelaListarRecebivel extends javax.swing.JFrame {
         btApagarItem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         try {
             txtPesDataInicio.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
@@ -84,19 +85,10 @@ public class TelaListarRecebivel extends javax.swing.JFrame {
 
         tblDespesas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+
             }
         ));
         tblDespesas.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -175,6 +167,7 @@ public class TelaListarRecebivel extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPesDataFimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesDataFimActionPerformed
