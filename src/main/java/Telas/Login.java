@@ -5,9 +5,13 @@
 package Telas;
 
 import Model.Usuario;
+import Relatorio.GerarRelatorio;
 import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -48,6 +52,8 @@ public class Login extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         btLogin = new javax.swing.JButton();
         lbStatusConexao = new javax.swing.JLabel();
+        btReport = new javax.swing.JButton();
+        btReportView = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +84,30 @@ public class Login extends javax.swing.JFrame {
 
         lbStatusConexao.setText("Conexao: ATIVO");
 
+        btReport.setLabel("Relatório");
+        btReport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btReportMouseClicked(evt);
+            }
+        });
+        btReport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btReportActionPerformed(evt);
+            }
+        });
+
+        btReportView.setText("View Report");
+        btReportView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btReportViewMouseClicked(evt);
+            }
+        });
+        btReportView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btReportViewActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -87,21 +117,28 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbStatusConexao)
-                        .addGap(122, 122, 122)
-                        .addComponent(btLogin))
+                        .addGap(53, 53, 53)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lbStatusConexao)
+                                .addGap(122, 122, 122)
+                                .addComponent(btLogin))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                                    .addComponent(txtUsuario)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                            .addComponent(txtUsuario))))
-                .addContainerGap(65, Short.MAX_VALUE))
+                        .addGap(125, 125, 125)
+                        .addComponent(btReport)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btReportView)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,7 +157,11 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbStatusConexao)
                     .addComponent(btLogin))
-                .addGap(41, 41, 41))
+                .addGap(43, 43, 43)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btReport)
+                    .addComponent(btReportView))
+                .addGap(82, 82, 82))
         );
 
         pack();
@@ -154,6 +195,30 @@ public class Login extends javax.swing.JFrame {
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btLoginActionPerformed
+
+    private void btReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btReportMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btReportMouseClicked
+
+    private void btReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReportActionPerformed
+        // TODO add your handling code here:
+        GerarRelatorio report = new GerarRelatorio(conexao);
+        report.print_report("categoria");
+    }//GEN-LAST:event_btReportActionPerformed
+
+    private void btReportViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btReportViewMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btReportViewMouseClicked
+
+    private void btReportViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReportViewActionPerformed
+        // TODO add your handling code here:
+        GerarRelatorio report = new GerarRelatorio(conexao);
+        try {
+            report.previewReport("2010-01-01","2010-12-31");
+        } catch (JRException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btReportViewActionPerformed
 
     /**
      * @param args the command line arguments
@@ -192,6 +257,8 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btLogin;
+    private javax.swing.JButton btReport;
+    private javax.swing.JButton btReportView;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
