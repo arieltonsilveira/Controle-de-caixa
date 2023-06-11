@@ -75,23 +75,10 @@
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-<<<<<<< HEAD
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="lbStatusConexao" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btLogin" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btReport" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btReportView" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
-=======
               <Component id="lbStatusConexao" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btLogin" min="-2" pref="36" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
->>>>>>> 4e140c9f6df3419e2a06205e3746cf3e95f80a26
           </Group>
       </Group>
     </DimensionLayout>
@@ -136,24 +123,6 @@
         <Property name="text" type="java.lang.String" value="Conexao: ATIVO"/>
         <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btReport">
-      <Properties>
-        <Property name="label" type="java.lang.String" value="Relat&#xf3;rio"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btReportMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btReportActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btReportView">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="View Report"/>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btReportViewMouseClicked"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btReportViewActionPerformed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>

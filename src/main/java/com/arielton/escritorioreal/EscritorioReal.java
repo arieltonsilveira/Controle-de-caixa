@@ -4,17 +4,12 @@
 
 package com.arielton.escritorioreal;
 
-import Model.Categoria;
-import Model.Despesa;
-import Model.Recebivel;
-import Model.Usuario;
 import ModuloConexao.Mysql;
 import Telas.Login;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import Telas.TelaPrincipal;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,7 +19,7 @@ public class EscritorioReal {
 
     public static void main(String[] args) throws SQLException {
     Connection conexao = Mysql.conector();
-
+        JOptionPane.showMessageDialog(null, conexao);
 //        TelaLogin telaLogin = new TelaLogin(conexao);
 //        telaLogin.setSize(600, 400);
 //        telaLogin.set();

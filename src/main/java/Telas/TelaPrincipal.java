@@ -34,6 +34,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btCadRecebivel = new javax.swing.JMenuItem();
         btListRecebivel = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu11 = new javax.swing.JMenu();
         itCadastrarCategoria = new javax.swing.JMenuItem();
         itListarCategorias = new javax.swing.JMenuItem();
@@ -104,6 +105,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jMenu3.setForeground(new java.awt.Color(255, 255, 255));
         jMenu3.setText("Relatorios");
+
+        jMenuItem2.setText("Despesa por Categoria");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
         jMenuBar1.add(jMenu3);
 
         jMenu11.setForeground(new java.awt.Color(255, 255, 255));
@@ -205,6 +215,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         listRecebivel.setVisible(true);
     }//GEN-LAST:event_btListRecebivelActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        JFrame listRecebivel = new TelaFormulario();
+        listRecebivel.setVisible(true);
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -255,6 +270,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

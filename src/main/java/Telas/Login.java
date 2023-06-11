@@ -5,13 +5,10 @@
 package Telas;
 
 import Model.Usuario;
-import Relatorio.GerarRelatorio;
+import ModuloConexao.Mysql;
 import java.sql.Connection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -26,11 +23,15 @@ public class Login extends javax.swing.JFrame {
 
     public Login() {
         initComponents();
+        this.conexao = Mysql.conector();
+        if (conexao == null) {
+            lbStatusConexao.setText("ERRO DE BANCO");
+        }
     }
 
     public Login(Connection conexao) {
         initComponents();
-        this.conexao = conexao;
+        this.conexao = Mysql.conector();
         if (conexao == null) {
             lbStatusConexao.setText("ERRO DE BANCO");
         }
@@ -52,8 +53,7 @@ public class Login extends javax.swing.JFrame {
         txtSenha = new javax.swing.JPasswordField();
         btLogin = new javax.swing.JButton();
         lbStatusConexao = new javax.swing.JLabel();
-        btReport = new javax.swing.JButton();
-        btReportView = new javax.swing.JButton();
+    
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAlwaysOnTop(true);
@@ -80,38 +80,10 @@ public class Login extends javax.swing.JFrame {
                 btLoginMouseClicked(evt);
             }
         });
-        btLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btLoginActionPerformed(evt);
-            }
-        });
+       
 
         lbStatusConexao.setText("Conexao: ATIVO");
         lbStatusConexao.setToolTipText("");
-
-        btReport.setLabel("Relatório");
-        btReport.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btReportMouseClicked(evt);
-            }
-        });
-        btReport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btReportActionPerformed(evt);
-            }
-        });
-
-        btReportView.setText("View Report");
-        btReportView.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btReportViewMouseClicked(evt);
-            }
-        });
-        btReportView.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btReportViewActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -186,34 +158,6 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btLoginMouseClicked
 
-    private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btLoginActionPerformed
-
-    private void btReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btReportMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btReportMouseClicked
-
-    private void btReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReportActionPerformed
-        // TODO add your handling code here:
-        GerarRelatorio report = new GerarRelatorio(conexao);
-        report.print_report("categoria");
-    }//GEN-LAST:event_btReportActionPerformed
-
-    private void btReportViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btReportViewMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btReportViewMouseClicked
-
-    private void btReportViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btReportViewActionPerformed
-        // TODO add your handling code here:
-        GerarRelatorio report = new GerarRelatorio(conexao);
-        try {
-            report.previewReport("2010-01-01","2010-12-31");
-        } catch (JRException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_btReportViewActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -251,8 +195,6 @@ public class Login extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btLogin;
-    private javax.swing.JButton btReport;
-    private javax.swing.JButton btReportView;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

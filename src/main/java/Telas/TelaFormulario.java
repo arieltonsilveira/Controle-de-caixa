@@ -4,13 +4,19 @@
  */
 package Telas;
 
+import ModuloConexao.Mysql;
+import Relatorio.GerarRelatorio;
 import static Telas.TelaListarRecebivel.isDateValid;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
+import net.sf.jasperreports.engine.JRException;
 
 /**
  *
@@ -21,8 +27,10 @@ public class TelaFormulario extends javax.swing.JFrame {
     /**
      * Creates new form TelaFormulario
      */
+    Connection conexao;
     public TelaFormulario() {
         initComponents();
+        this.conexao = Mysql.conector();
     }
 
     /**
@@ -40,7 +48,8 @@ public class TelaFormulario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         txtPesDataInicio.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         try {
@@ -105,6 +114,7 @@ public class TelaFormulario extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPesDataFimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesDataFimActionPerformed
@@ -167,6 +177,16 @@ public class TelaFormulario extends javax.swing.JFrame {
         if (!isDateValid(txtPesDataInicio.getText()) || !isDateValid(txtPesDataFim.getText())) {
             JOptionPane.showMessageDialog(rootPane, "DATAS DO FILTRO DE PESQUISA INVALIDAS!", "VALORES INVALIDOS", EXIT_ON_CLOSE);
             return;
+        }
+        
+        GerarRelatorio report = new GerarRelatorio(conexao);
+        try {
+            String[] inicio = txtPesDataInicio.getText().split("/");
+            String[] fim = txtPesDataFim.getText().split("/");
+            
+            report.previewReport(inicio[2]+"-"+inicio[1]+"-"+inicio[0], fim[2]+"-"+fim[1]+"-"+fim[0]);
+        } catch (JRException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
