@@ -50,6 +50,10 @@ public class Login extends javax.swing.JFrame {
         lbStatusConexao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setBackground(new java.awt.Color(204, 204, 255));
+        setFont(new java.awt.Font("Arial Black", 0, 10)); // NOI18N
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Gestão de Despesas");
@@ -77,31 +81,31 @@ public class Login extends javax.swing.JFrame {
         });
 
         lbStatusConexao.setText("Conexao: ATIVO");
+        lbStatusConexao.setToolTipText("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(96, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(90, 90, 90))
             .addGroup(layout.createSequentialGroup()
                 .addGap(53, 53, 53)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(lbStatusConexao)
-                        .addGap(122, 122, 122)
-                        .addComponent(btLogin))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
-                            .addComponent(txtUsuario))))
-                .addContainerGap(65, Short.MAX_VALUE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 238, Short.MAX_VALUE)
+                                .addComponent(txtUsuario)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,13 +121,14 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(txtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbStatusConexao)
-                    .addComponent(btLogin))
-                .addGap(41, 41, 41))
+                .addComponent(lbStatusConexao)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
@@ -132,23 +137,23 @@ public class Login extends javax.swing.JFrame {
 
     private void btLoginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btLoginMouseClicked
 
-        JFrame home = new TelaPrincipal();
-        home.setVisible(true);
-        this.setVisible(false);
-//        String nome = txtUsuario.getText();
-//        String senha = String.valueOf(txtSenha.getPassword());
-//        if (!nome.isEmpty() && !senha.isEmpty()) {
-//            Usuario usu = new Usuario(conexao, nome, senha);
-//            if (usu.buscarUsuario()) {
-//                JFrame home = new TelaPrincipal();
-//                home.setVisible(true);
-//                this.setVisible(false);
-//            } else {
-//                JOptionPane.showMessageDialog(rootPane, "Usuario/Senha Invalido!", "ERRO DE LOGIN", HEIGHT);
-//            }
-//        } else {
-//            JOptionPane.showMessageDialog(rootPane, "PREENCHA OS DADOS CORRETAMENTE", "ERRO DE LOGIN", HEIGHT);
-//        }
+//        JFrame home = new TelaPrincipal();
+//        home.setVisible(true);
+//        this.setVisible(false);
+        String nome = txtUsuario.getText();
+        String senha = String.valueOf(txtSenha.getPassword());
+        if (!nome.isEmpty() && !senha.isEmpty()) {
+            Usuario usu = new Usuario(conexao, nome, senha);
+            if (usu.buscarUsuario()) {
+                JFrame home = new TelaPrincipal();
+                home.setVisible(true);
+                this.setVisible(false);
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Usuario/Senha Invalido!", "ERRO DE LOGIN", HEIGHT);
+            }
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "PREENCHA OS DADOS CORRETAMENTE", "ERRO DE LOGIN", HEIGHT);
+        }
     }//GEN-LAST:event_btLoginMouseClicked
 
     private void btLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLoginActionPerformed
